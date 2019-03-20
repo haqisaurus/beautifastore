@@ -12,6 +12,11 @@ router.get('/', (req, res) => {
     }).sort({
         '_id': -1
     }).toArray((err, data) => {
+        data.map(element => {
+            let url = new URL(element.url)
+            element.urlView = url.origin + url.pathname
+            return element
+        });
         res.render(__dirname + '/../views/index.html', { data })
     })
 })
@@ -31,6 +36,11 @@ router.post('/', (req, res) => {
     }).sort({
         '_id': -1
     }).toArray((err, data) => {
+        data.map(element => {
+            let url = new URL(element.url)
+            element.urlView = url.origin + url.pathname
+            return element
+        });
         res.render(__dirname + '/../views/index.html', { data })
     })
 })
@@ -51,8 +61,10 @@ router.get('/insert', async (req, res) => {
     })
 })
 router.post('/insert', (req, res) => {
+    let url = new URL(req.body.url)
+    url = url.origin + url.pathname
     db.get().collection('product').findOne({
-        url: req.body.url,
+        url: {$regex: "^.*" + url + ".*$", $options: 'i'},
     }).then(data => {
         console.log(data)
         if (data) {

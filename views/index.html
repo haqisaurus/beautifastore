@@ -1,85 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"
+            id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <!------ Include the above in your HEAD tag ---------->
         <title>Document</title>
-</head>
-<body>
-    
-    
-    <h2>Filterable Table</h2>
-    <button class="btn btn-warning">
-        <a href="insert">Insert</a>
-    </button>
-    <button class="btn btn-primary">Reload Stock</button>
-    <p>Type something in the input field to search the table for first names, last names or emails:</p>
-    <form action="/" method="POST">
-        <div class="input-group">
-            <div class="input-group-append">
-                <input type="text" name="search" class="form-control" value="">
-                <div class="input-group-text">
-                    <button class="btn btn-outline-secondary" type="submit"><i class="fa fa-search"></i></button>
+    </head>
+
+    <body>
+        <div class="container">
+
+            <h2>Filterable Table</h2>
+            <button class="btn btn-warning">
+                <a href="insert">Insert</a>
+            </button>
+            <button class="btn btn-primary">Reload Stock</button>
+            <p>Type something in the input field to search the table for first names, last names or emails:</p>
+            <form action="/" method="POST">
+                <div class="input-group">
+                    <div class="input-group-append">
+                        <input type="text" name="search" class="form-control" value="">
+                        <div class="input-group-text">
+                            <button class="btn btn-outline-secondary" type="submit"><i
+                                    class="fa fa-search"></i></button>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </form>
+            <br><br>
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Code</th>
+                        <th>Provider</th>
+                        <th>Stok</th>
+                        <th>Harga</th>
+                        <th>Varian</th>
+                        <th>URL</th>
+                    </tr>
+                </thead>
+                <tbody id="myTable">
+                    {{#data}}
+                        <tr>
+                            <td>{{ name }}</td>
+                            <td>{{ code }}</td>
+                            <td>{{ from }}</td>
+                            {{#stock}}
+                                <td>{{ stock }}</td>
+                            {{/stock}}
+                            {{^stock}}
+                                <td>Tersedia</td>
+                            {{/stock}}
+                            <td>{{ price }}</td>
+                            <td>-</td>
+                            <td><a href="{{ url }}">{{ urlView }}</a></td>
+                        </tr>
+                    {{/data}}
+
+                </tbody>
+            </table>
         </div>
-    </form>
-    <br><br>
-    <style>
-    table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-    }
-    
-    td, th {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-    }
-    
-    tr:nth-child(even) {
-        background-color: #dddddd;
-    }</style>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Code</th>
-                <th>Provider</th>
-                <th>Stok</th>
-                <th>Harga</th>
-                <th>Varian</th>
-                <th>URL</th>
-            </tr>
-        </thead>
-        <tbody id="myTable">
-            {{#data}}
-                <tr>
-                    <td>{{ name }}</td>
-                    <td>{{ code }}</td>
-                    <td>{{ from }}</td>
-                    {{#stock}}
-                    <td>{{ stock }}</td>
-                    {{/stock}}
-                    {{^stock}}
-                    <td>Tersedia</td>
-                    {{/stock}}
-                    <td>{{ price }}</td>
-                    <td>Hijau</td>
-                    <td><a href="{{ url }}">{{ url }}</a></td>
-                </tr>
-            {{/data}}
-            
-        </tbody>
-    </table>
-    
-    <p>Note that we start the search in tbody, to prevent filtering the table headers.</p>
-</body>
+    </body>
+
 </html>
