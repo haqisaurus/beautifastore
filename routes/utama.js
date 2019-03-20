@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     db.get().collection('product').find({
     }).sort({
         '_id': -1
-    }).limit(1).toArray((err, data) => {
+    }).toArray((err, data) => {
         res.render(__dirname + '/../views/index.html', { data })
     })
 })
@@ -26,8 +26,8 @@ router.get('/insert', async (req, res) => {
             sku = incrementNumberInString(data[0].code)
         }
         // console.log(req.flash('sku'))
-        let success = req.flash('sku')
-        res.render(__dirname + '/../views/insert.html', { sku: sku, messages: success })
+        // let success = req.flash('sku')
+        res.render(__dirname + '/../views/insert.html', { sku: sku, messages: 'success' })
         // delete res.session.sku; // remove from further requests
     })
 })
@@ -57,7 +57,7 @@ router.post('/insert', (req, res) => {
             }).then(result => {
                 console.log(result)
                 if (result.insertedCount) {
-                    req.flash('sku', req.body.sku);
+                    // req.flash('sku', req.body.sku);
                     res.redirect('/insert')
                 }
             })
