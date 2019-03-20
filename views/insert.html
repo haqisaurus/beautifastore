@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+
+    <body>
+        <a href="/">Back</a>
+        <br>
+        <br>
+        {{#messages}}
+            <div class="col-3 offset-3">
+                <div class="input-group">
+                    <div class="input-group-prepend copy-it">
+                        <div class="input-group-text">
+                            <i class="fa fa-clipboard"></i>
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" onClick="this.select(); document.execCommand('copy')"
+                        readonly value="{{messages}}">
+                </div>
+            </div>
+            <br>
+            <br>
+        {{/messages}}
+        {{#error}}
+            <div class="alert alert-error">
+                <strong>ERROR!</strong> {{ error }}
+            </div>
+        {{/error}}
+        <form action="/insert" method="POST">
+            <div class="form-group row">
+                <div class="col-12">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fa fa-address-card"></i>
+                            </div>
+                        </div>
+                        <input id="name" name="name" type="text" class="form-control" placeholder="Name" required
+                            value="{{name}}">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-12">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fa fa-address-card"></i>
+                            </div>
+                        </div>
+                        <input id="name" name="price" type="number" class="form-control" placeholder="price" required
+                            value="{{price}}">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-12">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fa fa-address-book"></i>
+                            </div>
+                        </div>
+                        <input id="sku" name="sku" readonly type="text" class="form-control" value="{{ sku }}">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-12">
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input name="radio" id="radio_0" type="radio" class="custom-control-input" value="tokopedia"
+                            checked>
+                        <label for="radio_0" class="custom-control-label">Tokopedia</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input name="radio" id="radio_1" type="radio" class="custom-control-input" value="shopee">
+                        <label for="radio_1" class="custom-control-label">Shopee</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input name="radio" id="radio_2" type="radio" class="custom-control-input" value="bukalapak">
+                        <label for="radio_2" class="custom-control-label">Bukalapak</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-12">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fa fa-anchor"></i>
+                            </div>
+                        </div>
+                        {{#error}}
+                        <input id="url" name="url" type="url" placeholder="https://example.com" pattern="https://.*"
+                            size="30" readonly class="form-control" placeholder="URL" required value="{{url}}">
+                        {{/error}}
+                        {{^error}}
+                        <input id="url" name="url" type="url" placeholder="https://example.com" pattern="https://.*"
+                            size="30"  class="form-control" placeholder="URL" required value="{{url}}">
+                        {{/error}}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-12">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fa fa-barcode"></i>
+                            </div>
+                        </div>
+                        <textarea name="desc" class="form-control" id="" cols="30" rows="10" ondblclick="this.select(); document.execCommand('copy')"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="offset-4 col-8">
+                    <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+
+    </body>
+
+</html>
