@@ -6,7 +6,32 @@ const path = require('path')
 const shortid = require('shortid');
 const db = require('./db')
 ObjectId = require('mongodb').ObjectID
-
+router.get('/get-detail', async (req, res) => {
+    console.log(req.query)
+    db.get().collection('product').findOne({
+        _id: ObjectId(req.query.id)
+    }).then(data => {
+        console.log(data)
+        res.send(data)
+    })
+})
+router.post('/update', async (req, res) => {
+    db.get().collection('product').findOneAndUpdate({
+        _id: ObjectId(req.body.id)
+    },{
+        $set: {
+            name: req.body.name,
+            code: req.body.sku,
+            url: req.body.url,
+            from: req.body.radio,
+            price: req.body.price,
+            desc: req.body.desc,
+        }
+    }).then(data => {
+        console.log(data)
+        res.send(data.lastErrorObject)
+    })
+})
 router.get('/', (req, res) => {
     db.get().collection('product').find({
     }).sort({
@@ -40,7 +65,7 @@ router.post('/', (req, res) => {
             let url = new URL(element.url)
             element.urlView = url.origin + url.pathname
             return element
-        });
+        })
         res.render(__dirname + '/../views/index.html', { data })
     })
 })
@@ -73,6 +98,7 @@ router.post('/insert', (req, res) => {
                 sku: data.code,
                 url: data.url,
                 from: data.radio,
+                desc: req.body.desc,
                 price: data.price,
                 error: 'DATA EXIST'
             })
@@ -84,6 +110,7 @@ router.post('/insert', (req, res) => {
                 url: req.body.url,
                 from: req.body.radio,
                 price: req.body.price,
+                desc: req.body.desc,
                 stock: 'tersedia'
             }).then(result => {
                 console.log(result)

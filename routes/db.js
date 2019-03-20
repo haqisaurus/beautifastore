@@ -8,7 +8,7 @@ exports.connect = function(url, done) {
     if (state.db) return done()
     MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
         if (err) return done(err);
-        var db = db.db('beautifa');
+        var db = db.db('beautifa')
         state.db = db;
         done();
     })
