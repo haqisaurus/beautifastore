@@ -7,6 +7,7 @@
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <!------ Include the above in your HEAD tag ---------->
         <title>Document</title>
 </head>
@@ -19,7 +20,16 @@
     </button>
     <button class="btn btn-primary">Reload Stock</button>
     <p>Type something in the input field to search the table for first names, last names or emails:</p>
-    <input id="myInput" type="text" placeholder="Search..">
+    <form action="/" method="POST">
+        <div class="input-group">
+            <div class="input-group-append">
+                <input type="text" name="search" class="form-control" value="">
+                <div class="input-group-text">
+                    <i class="fa fa-search"></i>
+                </div>
+            </div>
+        </div>
+    </form>
     <br><br>
     <style>
     table {
@@ -51,7 +61,6 @@
         </thead>
         <tbody id="myTable">
             {{#data}}
-                <b>{{name}}</b>
                 <tr>
                     <td>{{ name }}</td>
                     <td>{{ code }}</td>

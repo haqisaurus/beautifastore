@@ -15,6 +15,25 @@ router.get('/', (req, res) => {
         res.render(__dirname + '/../views/index.html', { data })
     })
 })
+router.post('/', (req, res) => {
+    db.get().collection('product').find({
+        "$or" : [
+            {
+                name: {$regex: "^.*" + req.body.search + ".*$", $options: 'i'}
+            }, 
+            {
+                code: {$regex: "^.*" + req.body.search + ".*$", $options: 'i'}
+            },
+            {
+                url: {$regex: "^.*" + req.body.search + ".*$", $options: 'i'}
+            },
+        ]
+    }).sort({
+        '_id': -1
+    }).toArray((err, data) => {
+        res.render(__dirname + '/../views/index.html', { data })
+    })
+})
 router.get('/insert', async (req, res) => {
     db.get().collection('product').find({
     }).sort({
