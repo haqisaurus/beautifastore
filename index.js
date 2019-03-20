@@ -5,15 +5,15 @@ const db = require('./routes/db')
 const bodyParser = require('body-parser')
 const path = require('path')
 const engines = require('consolidate');
-// const flash = require('connect-flash');
-// const session = require('express-session');
-// const cookieParser = require('cookie-parser');
+const flash = require('connect-flash');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 
-// app.use(cookieParser('secret'));
-// app.use(session({cookie: { maxAge: 60000 }}));
+app.use(cookieParser('secret'));
+app.use(session({cookie: { maxAge: 60000 }}));
 app.use(bodyParser.urlencoded({extend:true}));
 app.use(express.static(path.join(__dirname, 'public')));
-// app.use(flash())
+app.use(flash())
 
 app.set('views', __dirname + '/views');
 app.engine('html', engines.mustache);
