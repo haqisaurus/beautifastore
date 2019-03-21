@@ -24,6 +24,21 @@
             </button>
             <button class="btn btn-primary">Reload Stock</button>
             <p>Type something in the input field to search the table for first names, last names or emails:</p>
+            {{#messages}}
+                <div class="col-3 offset-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend copy-it">
+                            <div class="input-group-text">
+                                <i class="fa fa-clipboard"></i>
+                            </div>
+                        </div>
+                        <input type="text" class="form-control" onClick="this.select(); document.execCommand('copy')"
+                            readonly value="{{messages}}">
+                    </div>
+                </div>
+                <br>
+                <br>
+            {{/messages}}
             <form action="/" method="POST">
                 <div class="input-group">
                     <div class="input-group-append">
@@ -72,8 +87,8 @@
             </div>
         </div>
         <!-- Modal -->
-        <div class="modal fade bd-example-modal-lg" id="updater" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-            aria-hidden="true">
+        <div class="modal fade bd-example-modal-lg" id="updater" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <form action="/update" method="POST" style="width: 100%">
                     <div class="modal-content">

@@ -42,7 +42,8 @@ router.get('/', (req, res) => {
             element.urlView = url.origin + url.pathname
             return element
         });
-        res.render(__dirname + '/../views/index.html', { data })
+        let success = req.flash('sku')
+        res.render(__dirname + '/../views/index.html', { data, messages: success })
     })
 })
 router.post('/', (req, res) => {
@@ -116,7 +117,7 @@ router.post('/insert', (req, res) => {
                 console.log(result)
                 if (result.insertedCount) {
                     req.flash('sku', req.body.sku);
-                    res.redirect('/insert')
+                    res.redirect('/')
                 }
             })
         }
